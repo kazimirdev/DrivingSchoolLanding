@@ -1,6 +1,16 @@
 from flask_sqlalchemy import SQLAlchemy
 from app import app, db
 
+class Instructor(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    surname = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    phone = db.Column(db.String(15), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f"<Instructor {self.name}>"
+
 
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
