@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="pl" x-data>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OSK STOP – Szkoła Jazdy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
+  <script defer src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+  <!-- Alpine.js for interactivity -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    .swiper { height: auto; }
+    .swiper-slide img { width: 100%; height: auto; object-fit: cover; }
+  </style>
+</head>
+<body class="font-sans leading-relaxed text-gray-800">
+  <header class="bg-white shadow-md fixed w-full z-50">
+    <div class="container mx-auto flex items-center justify-between p-4">
+      <div class="leading-tight">
+        <a href="#" class="text-xl font-bold block">OSK</a>
+        <a href="#" class="text-xl font-bold block -mt-1">STOP</a>
+      </div>
+      <nav id="nav-menu" class="hidden md:flex gap-6 whitespace-nowrap md:flex-nowrap">
+        <a href="#onas" class="hover:text-red-600">O&nbsp;nas</a>
+        <a href="#nauka" class="hover:text-red-600">Nauka</a>
+        <a href="#jak-rozpoczac" class="hover:text-red-600">Jak&nbsp;rozpocząć</a>
+        <a href="#cennik" class="hover:text-red-600">Cennik</a>
+        <a href="#kontakt" class="hover:text-red-600">Kontakt</a>
+      </nav>
+      <button id="burger" class="md:hidden focus:outline-none" aria-label="menu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </header>
+  <main class="pt-[72px]">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="text-center py-6 text-sm bg-gray-900 text-gray-400">
+    &copy; 1991–{{ now().year }} Ośrodek Szkolenia Kierowców „STOP”
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const navMenu = document.getElementById('nav-menu');
+    burger.addEventListener('click', () => navMenu.classList.toggle('hidden'));
+
+    const naukaSwiper = new Swiper('.swiper:not(.gallery)', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      autoHeight: true,
+    });
+
+    const gallerySwiper = new Swiper('.gallery', {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on: { slideChange: updateSubtitle },
+    });
+
+    const subtitles = [
+      'Plac manewrowy',
+      'Sala wykładowa',
+      'Citroën C3 szkoleniowy',
+    ];
+    const subtitleEl = document.getElementById('gallery-subtitle');
+    function updateSubtitle() {
+      const idx = gallerySwiper.realIndex;
+      subtitleEl.textContent = subtitles[idx] || '';
+    }
+  </script>
+</body>
+</html>
