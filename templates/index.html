@@ -1,303 +1,152 @@
 
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OSK STOP – Szkoła Jazdy</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Swiper.js CDN -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/swiper@9/swiper-bundle.min.css"
-  />
-  <script defer src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
-
-  <style>
-    /* Custom height for adaptive slider */
-    .swiper {
-      height: auto;
-    }
-    /* Make image slides responsive */
-    .swiper-slide img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-  </style>
-</head>
-<body class="font-sans leading-relaxed text-gray-800">
-  <!-- Navigation -->
-  <header class="bg-white shadow-md fixed w-full z-50">
-    <div class="container mx-auto flex items-center justify-between p-4">
-      <a href="#" class="text-xl font-bold">OSK STOP</a>
-      <nav id="nav-menu" class="hidden md:flex gap-6">
-        <a href="#onas" class="hover:text-red-600">O&nbsp;nas</a>
-        <a href="#nauka" class="hover:text-red-600">Nauka</a>
-        <a href="#jak-rozpoczac" class="hover:text-red-600">Jak rozpocząć</a>
-        <a href="#cennik" class="hover:text-red-600">Cennik</a>
-        <a href="#kontakt" class="hover:text-red-600">Kontakt</a>
-      </nav>
-      <button
-        id="burger"
-        class="md:hidden focus:outline-none"
-        aria-label="menu"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-8 w-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-      </button>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section
-    class="min-h-screen flex flex-col justify-center items-center text-center bg-cover bg-center"
-    style="background-image: url('images/hero.jpg')"
+{% extends "base.html" %}
+{% block content %}
+<!-- Hero -->
+<section
+  class="min-h-screen flex flex-col justify-center items-center text-center bg-cover bg-center"
+  style="background-image: url('{{ url_for('static', filename='images/hero.jpg') }}')"
+>
+  <div
+    class="bg-white/80 p-6 rounded-2xl shadow-xl max-w-xl mx-4 backdrop-blur"
   >
-    <div
-      class="bg-white/80 p-6 rounded-2xl shadow-xl max-w-xl mx-4 backdrop-blur"
-    >
-      <h1 class="text-2xl md:text-4xl font-bold mb-4">
-        Zapnij pasy:
-      </h1>
-      <p class="mb-4">
-        Eksperci podają miliony powodów, dla których warto zapinać pasy – to one
-        przytrzymują nas na miejscu w przypadku nagłych manewrów lub kolizji i
-        mogą uratować życie. Badania dowodzą, że nie­zapięci pasażerowie nie
-        tylko nie utrzymają się na miejscu, lecz także stanowią zagrożenie dla
-        innych, ponieważ „ważą” wtedy wielokrotnie więcej.
-      </p>
-      <p class="font-semibold mb-6">
-        Pamiętaj! Zawsze dopilnuj, aby Twoi pasażerowie mieli zapięte pasy.
-      </p>
-      <a
-        href="#jak-rozpoczac"
-        class="inline-block bg-red-600 text-white px-8 py-3 rounded-full shadow-lg hover:bg-red-700 transition"
-        >Start</a
-      >
-    </div>
-  </section>
-
-  <!-- O nas -->
-  <section id="onas" class="container mx-auto px-4 py-20">
-    <h2 class="text-3xl font-bold mb-8">O nas</h2>
+    <h1 class="text-2xl md:text-4xl font-bold mb-4">
+      Zapnij pasy:
+    </h1>
     <p class="mb-4">
-      Ośrodek Szkolenia Kierowców „STOP” w Koszalinie działa od 1991 roku.
-      Prowadzimy kursy na prawo jazdy&nbsp;kat. A2, A, B oraz&nbsp;B+E,
-      wykorzystując m.in. Citroëna&nbsp;C3, Peugeota&nbsp;208 i motocykle Suzuki
-      GS&nbsp;500 oraz Gladius&nbsp;650. Zajęcia teoretyczne odbywają się w
-      grupach, a jazdy są indywidualne i rejestrowane systemem wideo identycznym
-      jak w pojazdach egzaminacyjnych.
+      {{ hero_text|safe }}
     </p>
-  </section>
+    <a
+      href="#jak-rozpoczac"
+      class="inline-block bg-red-600 text-white px-8 py-3 rounded-full shadow-lg hover:bg-red-700 transition"
+      >Start</a
+    >
+  </div>
+</section>
 
-  <!-- Nauka (Slider) -->
-  <section id="nauka" class="bg-gray-100 py-20">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-8 text-center">Nauka</h2>
-      <div class="swiper w-full md:w-3/4 mx-auto">
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-          <!-- Slides -->
-          <div class="swiper-slide p-4 bg-white rounded-xl shadow">
-            <h3 class="text-xl font-semibold mb-4">
-              Dbamy o Twój komfort
-            </h3>
-            <p>
-              Wszystkie pojazdy w naszej flocie są klimatyzowane, a instruktorzy
-              dbają o przyjazną atmosferę na zajęciach.
-            </p>
-          </div>
+<!-- O nas -->
+<section id="onas" class="container mx-auto px-4 py-20">
+  <h2 class="text-3xl font-bold mb-8">O nas</h2>
+  <p class="mb-4">
+    Ośrodek Szkolenia Kierowców „STOP” w Koszalinie działa od 1991 roku.
+    Prowadzimy kursy na prawo jazdy&nbsp;kat. A2, A, B oraz&nbsp;B+E,
+    wykorzystując m.in. Citroëna&nbsp;C3, Peugeota&nbsp;208 i motocykle Suzuki
+    GS&nbsp;500 oraz Gladius&nbsp;650. Zajęcia teoretyczne odbywają się w
+    grupach, a jazdy są indywidualne i rejestrowane systemem wideo identycznym
+    jak w pojazdach egzaminacyjnych.
+  </p>
+</section>
 
-          <div class="swiper-slide">
-            <img
-              src="images/lesson1.jpg"
-              alt="Instruktor tłumaczy manewr"
-              class="rounded-xl shadow"
-            />
-          </div>
+<!-- Nauka (Slider) -->
+<section id="nauka" class="bg-gray-100 py-20">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-8 text-center">Nauka</h2>
+    <div class="swiper w-full md:w-3/4 mx-auto">
+<div class="swiper-wrapper">
+  {% for img in gallery_images %}
+    <div class="swiper-slide">
+      <img src="{{ url_for('static', filename='images/gallery/' ~ img.filename) }}"
+           alt="{{ img.alt }}"
+           class="rounded-xl shadow" />
+    </div>
+  {% endfor %}
+</div>
+      <div class="swiper-pagination !static mt-4"></div>
+    </div>
+  </div>
+</section>
 
-          <div class="swiper-slide p-4 bg-white rounded-xl shadow">
-            <h3 class="text-xl font-semibold mb-4">
-              Elastyczny grafik jazd
-            </h3>
-            <p>
-              Dopasujemy godziny jazd do Twoich zajęć w szkole lub pracy, aby
-              nauka była wygodna.
-            </p>
-          </div>
+<!-- Jak rozpocząć -->
+<section id="jak-rozpoczac" class="bg-gray-100 py-20">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-8 text-center">Jak rozpocząć?</h2>
+    <ol class="space-y-4 max-w-3xl mx-auto list-decimal list-inside">
+      <li>
+        <span class="font-semibold"
+          >Zrób badanie lekarskie u uprawnionego lekarza</span
+        >
+        (<a
+          href="tel:+48605962578"
+          class="text-red-600 underline"
+          >605&nbsp;962&nbsp;578</a
+        >
+        /
+        <a
+          href="tel:+48501187986"
+          class="text-red-600 underline"
+          >501&nbsp;187&nbsp;986</a
+        >).
+      </li>
+      <li>
+        Z&nbsp;orzeczeniem lekarskim i zdjęciem udaj się do Wydziału
+        Komunikacji, aby wypełnić wniosek o&nbsp;wydanie Prawa Jazdy i uzyskać
+        numer Profilu Kandydata na Kierowcę&nbsp;(PKK).
+      </li>
+      <li>
+        Z&nbsp;numerem&nbsp;PKK i&nbsp;PESEL&nbsp;zgłoś się do&nbsp;Szkoły
+        Jazdy, aby zapisać się na szkolenie.
+      </li>
+    </ol>
+  </div>
+</section>
 
-          <div class="swiper-slide">
-            <img
-              src="images/lesson2.jpg"
-              alt="Kandydat ćwiczy parkowanie"
-              class="rounded-xl shadow"
-            />
-          </div>
+<!-- Cennik -->
+<section id="cennik" class="container mx-auto px-4 py-20" x-data="{open:null}">
+  <h2 class="text-3xl font-bold mb-8">Cennik</h2>
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {% for c in categories %}
+      <div class="p-6 bg-white rounded-xl shadow flex flex-col">
+        <button @click="open === {{ c.id }} ? open=null : open={{ c.id }}" class="text-left">
+          <h3 class="text-xl font-semibold mb-2">{{ c.name }}</h3>
+          <span class="text-2xl font-bold text-red-600">{{ c.price }}&nbsp;PLN</span>
+        </button>
+        <div x-show="open === {{ c.id }}" x-transition class="mt-4">
+          <p class="mb-3">{{ c.description }}</p>
+          {% if c.image %}
+            <img src="{{ url_for('static', filename='images/cennik/' ~ c.image) }}"
+                 alt="{{ c.name }}" class="rounded-xl shadow">
+          {% endif %}
         </div>
-        <!-- If we need pagination -->
-        <div class="swiper-pagination !static mt-4"></div>
       </div>
-    </div>
-  </section>
+    {% endfor %}
+  </div>
+</section>
 
-  <!-- Jak rozpocząć -->
-  <section id="jak-rozpoczac" class="bg-gray-100 py-20">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-8 text-center">Jak rozpocząć?</h2>
-      <ol class="space-y-4 max-w-3xl mx-auto list-decimal list-inside">
-        <li>
-          <span class="font-semibold"
-            >Zrób badanie lekarskie u uprawnionego lekarza</span
-          >
-          (<a
-            href="tel:+48605962578"
-            class="text-red-600 underline"
-            >605&nbsp;962&nbsp;578</a
-          >
-          /
-          <a
-            href="tel:+48501187986"
-            class="text-red-600 underline"
-            >501&nbsp;187&nbsp;986</a
-          >).
-        </li>
-        <li>
-          Z&nbsp;orzeczeniem lekarskim i zdjęciem udaj się do Wydziału
-          Komunikacji, aby wypełnić wniosek o&nbsp;wydanie Prawa Jazdy i uzyskać
-          numer Profilu Kandydata na Kierowcę&nbsp;(PKK).
-        </li>
-        <li>
-          Z&nbsp;numerem&nbsp;PKK i&nbsp;PESEL&nbsp;zgłoś się do&nbsp;Szkoły
-          Jazdy, aby zapisać się na szkolenie.
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- Cennik -->
-  <section id="cennik" class="container mx-auto px-4 py-20">
-    <h2 class="text-3xl font-bold mb-8">Cennik</h2>
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="p-6 bg-white rounded-xl shadow flex flex-col">
-        <h3 class="text-xl font-semibold mb-2">A2</h3>
-        <span class="mt-auto text-2xl font-bold text-red-600">2200&nbsp;PLN</span>
-      </div>
-      <div class="p-6 bg-white rounded-xl shadow flex flex-col">
-        <h3 class="text-xl font-semibold mb-2">A</h3>
-        <span class="mt-auto text-2xl font-bold text-red-600">2200&nbsp;PLN</span>
-      </div>
-      <div class="p-6 bg-white rounded-xl shadow flex flex-col">
-        <h3 class="text-xl font-semibold mb-2">B</h3>
-        <span class="mt-auto text-2xl font-bold text-red-600">2200&nbsp;PLN</span>
-      </div>
-      <div class="p-6 bg-white rounded-xl shadow flex flex-col">
-        <h3 class="text-xl font-semibold mb-2">
-          B (uczeń / student)
-        </h3>
-        <span class="mt-auto text-2xl font-bold text-red-600">2000&nbsp;PLN</span>
-      </div>
-      <div class="p-6 bg-white rounded-xl shadow flex flex-col">
-        <h3 class="text-xl font-semibold mb-2">A lub A2 + B</h3>
-        <span class="mt-auto text-2xl font-bold text-red-600">4000&nbsp;PLN</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Galeria -->
-  <section id="galeria" class="container mx-auto px-4 py-20">
-    <h2 class="text-3xl font-bold mb-6 text-center">Galeria</h2>
-
-    <div class="relative">
-      <div class="swiper gallery w-full">
-        <div class="swiper-wrapper">
-          <!-- 15 slides example -->
+<!-- Galeria -->
+<section id="galeria" class="container mx-auto px-4 py-20">
+  <h2 class="text-3xl font-bold mb-6 text-center">Galeria</h2>
+  <div class="relative">
+    <div class="swiper gallery w-full">
+      <div class="swiper-wrapper">
+        {% for img in gallery_images %}
           <div class="swiper-slide">
-            <img
-              src="images/plac1.jpg"
-              alt="Plac manewrowy"
-              class="rounded-xl shadow"
-            />
+            <img src="{{ url_for('static', filename='images/gallery/' ~ img.filename) }}"
+                 alt="{{ img.alt }}"
+                 class="rounded-xl shadow" />
           </div>
-          <div class="swiper-slide">
-            <img
-              src="images/plac2.jpg"
-              alt="Sala wykładowa"
-              class="rounded-xl shadow"
-            />
-          </div>
-          <div class="swiper-slide">
-            <img
-              src="images/auto1.jpg"
-              alt="Citroën C3 szkoleniowy"
-              class="rounded-xl shadow"
-            />
-          </div>
-          <!-- Add more slides as needed -->
-        </div>
-        <div
-          class="swiper-button-prev !text-red-600 hover:scale-110 transition"
-        ></div>
-        <div
-          class="swiper-button-next !text-red-600 hover:scale-110 transition"
-        ></div>
+        {% endfor %}
       </div>
-
-      <!-- Subtitle -->
-      <p
-        id="gallery-subtitle"
-        class="text-center font-semibold mt-4 text-lg"
-      >
-        Plac manewrowy
-      </p>
+      <div class="swiper-button-prev  !text-red-600 hover:scale-110 transition z-20"></div>
+      <div class="swiper-button-next !text-red-600 hover:scale-110 transition z-20"></div>
     </div>
-  </section>
+    <p id="gallery-subtitle" class="text-center font-semibold mt-4 text-lg">
+      Plac manewrowy
+    </p>
+  </div>
+</section>
 
-  <!-- Kontakt -->
-  <section
-    id="kontakt"
-    class="bg-red-600 text-white py-20"
-  >
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-8 text-center">Kontakt</h2>
-
-      <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-        <!-- Phones -->
-        <div>
-          <h3 class="font-semibold mb-2">Telefon</h3>
-          <ul class="space-y-1">
-            <li>
-              <a href="tel:+48604523540" class="underline"
-                >604&nbsp;523&nbsp;540</a
-              >
-            </li>
-            <li>
-              <a href="tel:+48606816517" class="underline"
-                >606&nbsp;816&nbsp;517</a
-              >
-            </li>
-            <li>
-              <a href="tel:+48943402638" class="underline"
-                >94&nbsp;34&nbsp;02&nbsp;638</a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <!-- Address -->
+<!-- Kontakt -->
+<section id="kontakt" class="bg-red-600 text-white py-20">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-8 text-center">Kontakt</h2>
+    <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+      <div>
+        <h3 class="font-semibold mb-2">Telefon</h3>
+        <ul class="space-y-1">
+          <li><a href="tel:+48604523540" class="underline">604&nbsp;523&nbsp;540</a></li>
+          <li><a href="tel:+48606816517" class="underline">606&nbsp;816&nbsp;517</a></li>
+          <li><a href="tel:+48943402638" class="underline">94&nbsp;34&nbsp;02&nbsp;638</a></li>
+        </ul>
+      </div>
         <div>
           <h3 class="font-semibold mb-2">Adres</h3>
           <p>
@@ -315,69 +164,11 @@
           </a>
           </p>
         </div>
-
-        <!-- Email -->
-        <div>
-          <h3 class="font-semibold mb-2">E-mail</h3>
-          <a
-            href="mailto:jotwysocki@interia.pl"
-            class="underline"
-            >jotwysocki@interia.pl</a
-          >
-        </div>
+      <div>
+        <h3 class="font-semibold mb-2">E-mail</h3>
+        <a href="mailto:jotwysocki@interia.pl" class="underline">jotwysocki@interia.pl</a>
       </div>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="text-center py-6 text-sm bg-gray-900 text-gray-400">
-    &copy; 1991–2025 Ośrodek Szkolenia Kierowców „STOP”
-  </footer>
-
-  <!-- Scripts -->
-  <script>
-    // Mobile menu toggle
-    const burger = document.getElementById('burger');
-    const navMenu = document.getElementById('nav-menu');
-    burger.addEventListener('click', () => {
-      navMenu.classList.toggle('hidden');
-    });
-
-    // Swiper sliders
-    const naukaSwiper = new Swiper('.swiper', {
-      slidesPerView: 1,
-      spaceBetween: 20,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      autoHeight: true,
-    });
-
-    const gallerySwiper = new Swiper('.gallery', {
-      slidesPerView: 1,
-      spaceBetween: 10,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      on: {
-        slideChange: updateSubtitle,
-      },
-    });
-
-    // Gallery subtitle update
-    const subtitles = [
-      'Plac manewrowy',
-      'Sala wykładowa',
-      'Citroën C3 szkoleniowy',
-    ];
-    const subtitleEl = document.getElementById('gallery-subtitle');
-
-    function updateSubtitle() {
-      const idx = gallerySwiper.realIndex;
-      subtitleEl.textContent = subtitles[idx] || '';
-    }
-  </script>
-</body>
-</html>
+  </div>
+</section>
+{% endblock %}
