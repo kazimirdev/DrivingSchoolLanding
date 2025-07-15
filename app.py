@@ -50,7 +50,7 @@ def index():
                       .all())
 
     hero_text = (
-        "Dopasujemy godziny jazd do Twoich zajęć w szkole lub pracy.<br> "
+        "Indywidualnie zajęcią zgodnie z twoim trybem życia.<br> "
         "Instruktorzy dbają o przyjazną atmosferę na zajęciach."
     )
     return render_template(

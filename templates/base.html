@@ -17,6 +17,14 @@
   <style>
     .swiper { height: auto; }
     .swiper-slide img { width: 100%; height: auto; object-fit: cover; }
+
+    /* cap any image that gets .max-half */
+    @media (min-width:1024px){
+      .max-half{                /* new helper */
+        width:auto !important;  /* override the earlier “width:100%” */
+        max-width:50%;
+      }
+    }
   </style>
 </head>
 <body class="font-sans leading-relaxed text-gray-800">
@@ -26,7 +34,7 @@
         <a href="#" class="text-xl font-bold block">OSK</a>
         <a href="#" class="text-xl font-bold block -mt-1">STOP</a>
       </div>
-      <nav id="nav-menu" class="d:flex gap-6 whitespace-nowrap md:flex-nowrap">
+      <nav id="nav-menu" class="md:flex gap-6 whitespace-nowrap md:flex-nowrap">
         <a href="#onas" class="hover:text-red-600">O&nbsp;nas</a>
         <a href="#nauka" class="hover:text-red-600">Nauka</a>
         <a href="#jak-rozpoczac" class="hover:text-red-600">Jak&nbsp;rozpocząć</a>
@@ -39,25 +47,13 @@
     {% block content %}{% endblock %}
   </main>
   <footer class="text-center py-6 text-sm bg-gray-900 text-gray-400">
-    &copy; 1991–{{ now().year }} Ośrodek Szkolenia Kierowców „STOP”
+    &copy; 1991–{{ now().year }} Ośrodek Szkolenia Kierowców "STOP" s.c. B&J WYSOCKI
   </footer>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-const burger   = document.getElementById('burger');
-const navMenu  = document.getElementById('nav-menu');
-
-burger.addEventListener('click', () => {
-  // show / hide the menu
-  navMenu.classList.toggle('hidden');
-
-  // (optional) update the accessible state of the button
-  const isOpen = !navMenu.classList.contains('hidden');
-  burger.setAttribute('aria-expanded', isOpen);
-});
   /* ----------  GALLERY  -------------------------------------------------- */
-  /* 1 )  data & DOM refs first */
   const subtitles  = {{ gallery_images | map(attribute='alt') | list | tojson }};
   const subtitleEl = document.getElementById('gallery-subtitle');
 
@@ -80,13 +76,18 @@ burger.addEventListener('click', () => {
       },
   });
 
-  /* ----------  NAUKA  ---------------------------------------------------- */
-  const naukaSwiper = new Swiper('.swiper:not(.gallery)', {
-      slidesPerView : 1,
-      spaceBetween  : 20,
-      pagination    : { el: '.swiper-pagination', clickable: true },
-      autoHeight    : true,
+  /* ----------  NAUKA & any extra swipers -------------------------------- */
+document.querySelectorAll('.swiper:not(.gallery)').forEach(swiperEl => {
+  new Swiper(swiperEl, {
+    slidesPerView : 1,
+    spaceBetween  : 20,
+    pagination    : {
+      el       : swiperEl.querySelector('.swiper-pagination'),
+      clickable: true,
+    },
+    autoHeight: true,
   });
+});
 });
 </script>
 </body>
