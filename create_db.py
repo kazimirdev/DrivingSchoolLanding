@@ -16,9 +16,11 @@ with app.app_context():
         images.append(GalleryImage(filename=fname, alt=alt, order=i))
     db.session.add_all(images)
 
+    # Uncomment the following lines to seed the database with initial data.
+    """
     # ----------  SEED DATA  ------------------------------------------------
     slides = [
-        Slide(order=1, title="Dbamy o Twój komfort",
+        Slide(order=1, title="Prawo jazdy kategorii A, A1, A2, B, B+E bez stresu",
               content=("Wszystkie pojazdy w naszej flocie są klimatyzowane, "
                        "a instruktorzy dbają o przyjazną atmosferę na zajęciach."),
               is_active=True),
@@ -28,6 +30,7 @@ with app.app_context():
               is_active=True),
         Slide(order=4, image="lesson2.jpg", is_active=True),
     ]
+    """
 
     categories = [
         Category(name="A2",            price=2200, is_active=True),

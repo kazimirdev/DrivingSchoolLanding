@@ -39,7 +39,7 @@ class GalleryImage(db.Model):
 @app.context_processor
 def inject_now():
     """Make `now()` usable in every template."""
-    return {"now": datetime.utcnow} 
+    return {"now": datetime.utcnow}
 @app.route('/')
 def index():
     slides         = Slide.query.filter_by(is_active=True).order_by(Slide.order).all()
@@ -50,9 +50,8 @@ def index():
                       .all())
 
     hero_text = (
-        "Dbamy o Twój komfort<br><br>"
-        "Wszystkie pojazdy w naszej flocie są klimatyzowane, "
-        "a instruktorzy dbają o przyjazną atmosferę na zajęciach."
+        "Dopasujemy godziny jazd do Twoich zajęć w szkole lub pracy.<br> "
+        "Instruktorzy dbają o przyjazną atmosferę na zajęciach."
     )
     return render_template(
         'index.html',
