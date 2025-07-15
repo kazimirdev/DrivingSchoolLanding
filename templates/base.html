@@ -17,15 +17,37 @@
   <style>
     .swiper { height: auto; }
     .swiper-slide img { width: 100%; height: auto; object-fit: cover; }
+  /* cap width and centre at ≥ 1024px */
+@media (min-width:1024px){
+  .max-half{
+    width:auto !important;
+    max-width:50%;
+    display:block;
+    margin-inline:auto;
+  }
+}
 
-    /* cap any image that gets .max-half */
-    @media (min-width:1024px){
-      .max-half{                /* new helper */
-        width:auto !important;  /* override the earlier “width:100%” */
-        max-width:50%;
-      }
-    }
+[x-cloak] { display:none !important; }
+
   </style>
+<script>
+document.addEventListener('alpine:init', () => {
+  Alpine.store('lightbox', {
+    open: false,
+    src: '',
+    alt: '',
+    show(el) {
+      this.src = el.getAttribute('src');
+      this.alt = el.getAttribute('alt') || '';
+      this.open = true;
+    },
+    close() {
+      this.open = false;
+    }
+  });
+});
+</script>
+
 </head>
 <body class="font-sans leading-relaxed text-gray-800">
   <header class="bg-white shadow-md fixed w-full z-50">
@@ -90,5 +112,21 @@ document.querySelectorAll('.swiper:not(.gallery)').forEach(swiperEl => {
 });
 });
 </script>
+<!-- Lightbox overlay -->
+<template x-teleport="body">
+  <div x-cloak x-show="$store.lightbox.open" x-transition.opacity
+       class="fixed inset-0 bg-black/80 flex items-center justify-center z-[9999]"
+       @click.self="$store.lightbox.close()">
+    <figure class="relative max-w-[90vw] max-h-[90vh]">
+      <img :src="$store.lightbox.src" :alt="$store.lightbox.alt"
+           class="w-full h-full object-contain rounded-xl shadow-2xl">
+      <button @click="$store.lightbox.close()"
+              class="absolute -top-6 -right-6 text-white text-4xl leading-none">
+        &times;
+      </button>
+    </figure>
+  </div>
+</template>
+
 </body>
 </html>

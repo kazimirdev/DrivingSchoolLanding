@@ -2,11 +2,8 @@
 {% extends "base.html" %}
 {% block content %}
 <!-- Hero -->
-<section id="start" class="relative flex flex-col justify-center items-center text-center
-                bg-cover bg-center
-                pt-24 pb-10        <!-- ↓ only 2.5 rem bottom -->
-                md:pt-32 md:pb-12  <!-- ↓ 3 rem bottom on md -->
-                lg:pt-40 lg:pb-16"> <!-- ↓ 4 rem bottom on lg -->
+<section class="relative flex flex-col justify-center items-center text-center bg-cover bg-center
+         py-24 md:py-32 lg:py-40   /* top-&-bottom padding instead of 100 vh */">
     <h1 class="text-2xl md:text-4xl font-bold mb-4">Zapnij pasy:</h1>
     <p class="mb-4">{{ hero_text|safe }}</p>
     <a href="#jak-rozpoczac"
@@ -14,15 +11,12 @@
   </div>
   <img src="{{ url_for('static', filename='images/preview.png') }}"
      alt="Ośrodek Szkolenia Kierowców STOP"
-     class="max-half w-full lg:ml-4 rounded-xl" />
+     class="max-half mx-auto rounded-xl"/>
 </section>
 
 <!-- O nas -->
 <section id="onas"
-         class="container mx-auto px-4
-                pt-8 pb-16        <!-- 2 rem top -->
-                md:pt-10 md:pb-20 <!-- 2.5 rem top on md -->
-                scroll-mt-20">
+         class="container mx-auto px-4 py-16 md:py-20 scroll-mt-20">
   <h2 class="text-3xl font-bold mb-8">O nas</h2>
   <p class="mb-4">
     Ośrodek Szkolenia Kierowców „STOP” w Koszalinie działa od 1991 roku.
@@ -45,7 +39,8 @@
           <div class="swiper-slide grid md:grid-cols-2 gap-8 items-center">
             <img src="{{ url_for('static', filename='images/nauka/' ~ s.image) }}"
                  alt="{{ s.title or 'nauka' }}"
-                 class="rounded-xl shadow" />
+                 class="cursor-zoom-in rounded-xl shadow"
+                 @click="$store.lightbox.show($el)"  />
 
             <div>
               {% if s.title %}
@@ -116,10 +111,9 @@
           <p class="mb-3">{{ c.description }}</p>
           {% if c.image %}
             <img src="{{ url_for('static', filename='images/cennik/' ~ c.image) }}"
-                 alt="{{ c.name }}"
-                 class="max-half rounded-xl shadow" />
-            <img src="{{ url_for('static', filename='images/cennik/' ~ c.image) }}"
-                 alt="{{ c.name }}" class="rounded-xl shadow">
+     alt="{{ c.name }}"
+     class="cursor-zoom-in max-half mx-auto rounded-xl shadow"
+     @click="$store.lightbox.show($el)" />
           {% endif %}
         </div>
       </div>
@@ -136,8 +130,9 @@
         {% for img in gallery_images %}
           <div class="swiper-slide">
             <img src="{{ url_for('static', filename='images/gallery/' ~ img.filename) }}"
-                 alt="{{ img.alt }}"
-                 class="max-half mx-auto rounded-xl shadow" />
+     alt="{{ img.alt }}"
+     class="cursor-zoom-in max-half mx-auto rounded-xl shadow"
+     @click="$store.lightbox.show($el)" />
           </div>
         {% endfor %}
       </div>
