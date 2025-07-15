@@ -1,3 +1,5 @@
+import os, secrets
+
 from datetime import datetime
 
 from flask import Flask, render_template
@@ -6,8 +8,10 @@ from src.db import db
 from src.models import Slide, Category, GalleryImage
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or secrets.token_hex(32)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///osk.db'
 db.init_app(app)
+import src.admin
 
 @app.context_processor
 def inject_now():
@@ -15,7 +19,7 @@ def inject_now():
 @app.route('/')
 def index():
     slides = Slide.query.filter_by(is_active=True).order_by(Slide.order).all()
-    categories = Category.query.filter_by(is_active=True).all()
+    categories = Category.query.filter_by(is_active=True).order_by(Category.position).all()
     gallery_images = (
         GalleryImage.query.filter_by(
             is_active=True).order_by(GalleryImage.order).all())
