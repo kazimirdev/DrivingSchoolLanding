@@ -1,4 +1,4 @@
-from app import db
+from src.db import db
 
 class Instructor(db.Model):
     id = db.Column(db.Integer,
@@ -80,3 +80,28 @@ class Purchase(db.Model):
 
     def __repr__(self):
         return f"<Purchase {self.id} by Student {self.student_id} for Service {self.service_id}>"
+
+
+
+class Slide(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120))
+    content = db.Column(db.Text)
+    image = db.Column(db.String(120))  # filename stored in static/images/nauka
+    order = db.Column(db.Integer, default=0)
+    is_active = db.Column(db.Boolean, default=True)
+
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.Text)
+    image = db.Column(db.String(120))  # filename stored in static/images/cennik
+    is_active = db.Column(db.Boolean, default=True)
+
+class GalleryImage(db.Model):
+    id        = db.Column(db.Integer, primary_key=True)
+    filename  = db.Column(db.String(120), nullable=False)   # 01_galeria.jpg …
+    alt       = db.Column(db.String(120))                   # "plac manewrowy" / "sala wykładowa"
+    order     = db.Column(db.Integer, default=0)
+    is_active = db.Column(db.Boolean, default=True)

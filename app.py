@@ -1,52 +1,24 @@
 from datetime import datetime
 
 from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
+
+from src.db import db
+from src.models import Slide, Category, GalleryImage
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///osk.db'
-db = SQLAlchemy(app)
-
-# --- MODELS --------------------------------------------------------------- #
-class Slide(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120))
-    content = db.Column(db.Text)
-    image = db.Column(db.String(120))  # filename stored in static/images/nauka
-    order = db.Column(db.Integer, default=0)
-    is_active = db.Column(db.Boolean, default=True)
-
-class Category(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), nullable=False)
-    price = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.Text)
-    image = db.Column(db.String(120))  # filename stored in static/images/cennik
-    is_active = db.Column(db.Boolean, default=True)
-
-class GalleryImage(db.Model):
-    id        = db.Column(db.Integer, primary_key=True)
-    filename  = db.Column(db.String(120), nullable=False)   # 01_galeria.jpg …
-    alt       = db.Column(db.String(120))                   # "plac manewrowy" / "sala wykładowa"
-    order     = db.Column(db.Integer, default=0)
-    is_active = db.Column(db.Boolean, default=True)
-
-
-# ------------------------------------------------------------------------- #
-
+db.init_app(app)
 
 @app.context_processor
 def inject_now():
-    """Make `now()` usable in every template."""
-    return {"now": datetime.utcnow}
+    return {"now": datetime.now}
 @app.route('/')
 def index():
-    slides         = Slide.query.filter_by(is_active=True).order_by(Slide.order).all()
-    categories     = Category.query.filter_by(is_active=True).all()
-    gallery_images = (GalleryImage.query
-                      .filter_by(is_active=True)
-                      .order_by(GalleryImage.order)
-                      .all())
+    slides = Slide.query.filter_by(is_active=True).order_by(Slide.order).all()
+    categories = Category.query.filter_by(is_active=True).all()
+    gallery_images = (
+        GalleryImage.query.filter_by(
+            is_active=True).order_by(GalleryImage.order).all())
 
     hero_text = (
         "Indywidualnie zajęcią zgodnie z twoim trybem życia.<br> "
