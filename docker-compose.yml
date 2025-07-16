@@ -1,25 +1,21 @@
-version: '3.8'
-
 services:
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./static:/app/static
-      - ./templates:/app/templates
-    environment:
-      FLASK_ENV: development
-    restart: always
+  web:               # Flask + Gunicorn
+    build: ./app
+    container_name: myapp_web
+    restart: unless-stopped
 
   nginx:
-    image: nginx:latest
+    image: nginx:1.29
+    container_name: myapp_nginx
+    restart: unless-stopped
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - certs:/etc/letsencrypt      # for HTTPS
     depends_on:
       - web
-    restart: always
+
+volumes:
+  certs:
