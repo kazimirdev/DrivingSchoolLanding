@@ -55,6 +55,7 @@ class LoginForm(FlaskForm):
 
 
 class SecureModelView(ModelView):
+
     def is_accessible(self):
         return current_user.is_authenticated and current_user.is_admin
     def inaccessible_callback(self, name, **kwargs):
@@ -84,6 +85,7 @@ class OrderedView(SecureModelView):
     ▸ The `order` cell is inline-editable, so you can
       re-number rows directly from the grid.
     """
+    form_rules = ("order",)
     column_default_sort  = ("order", True)   # ascending
     column_editable_list = ("order",)        # click-to-edit
 
