@@ -69,19 +69,38 @@ document.addEventListener('alpine:init', () => {
 </head>
 <body class="font-sans leading-relaxed text-gray-800">
   <header class="bg-white shadow-md fixed w-full z-50">
-    <div class="container mx-auto flex items-center justify-between p-4">
-      <div class="leading-tight">
-        <a href="#" class="text-xl font-bold block">OSK</a>
-        <a href="#" class="text-xl font-bold block -mt-1">STOP</a>
-      </div>
-      <nav id="nav-menu" class="md:flex gap-6 whitespace-nowrap md:flex-nowrap">
-        <a href="#onas" class="hover:text-red-600">O&nbsp;nas</a>
-        <a href="#nauka" class="hover:text-red-600">Nauka</a>
-        <a href="#jak-rozpoczac" class="hover:text-red-600">Jak&nbsp;rozpocząć</a>
-        <a href="#cennik" class="hover:text-red-600">Cennik</a>
-        <a href="#kontakt" class="hover:text-red-600">Kontakt</a>
-      </nav>
+  <div class="container mx-auto flex items-center justify-between p-4" x-data="{ mobileOpen: false }">
+    <div class="leading-tight">
+      <a href="#" class="text-xl font-bold block">OSK</a>
+      <a href="#" class="text-xl font-bold block -mt-1">STOP</a>
     </div>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex gap-6 whitespace-nowrap">
+      <a href="#onas" class="hover:text-red-600">O&nbsp;nas</a>
+      <a href="#nauka" class="hover:text-red-600">Nauka</a>
+      <a href="#jak-rozpoczac" class="hover:text-red-600">Jak&nbsp;rozpocząć</a>
+      <a href="#cennik" class="hover:text-red-600">Cennik</a>
+      <a href="#kontakt" class="hover:text-red-600">Kontakt</a>
+    </nav>
+
+    <!-- Burger button (mobile only) -->
+    <button @click="mobileOpen = !mobileOpen"
+            class="md:hidden text-3xl focus:outline-none">
+      &#9776;
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div x-show="mobileOpen"
+       x-transition
+       class="md:hidden fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-6 text-xl font-semibold">
+    <a href="#onas" class="hover:text-red-600" @click="mobileOpen = false">O&nbsp;nas</a>
+    <a href="#nauka" class="hover:text-red-600" @click="mobileOpen = false">Nauka</a>
+    <a href="#jak-rozpoczac" class="hover:text-red-600" @click="mobileOpen = false">Jak&nbsp;rozpocząć</a>
+    <a href="#cennik" class="hover:text-red-600" @click="mobileOpen = false">Cennik</a>
+    <a href="#kontakt" class="hover:text-red-600" @click="mobileOpen = false">Kontakt</a>
+  </div>
   </header>
   <main class="pt-[72px]">
     {% block content %}{% endblock %}
