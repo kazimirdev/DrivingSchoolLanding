@@ -3,6 +3,5 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
-RUN python -c "import os; open('osk.db', 'a').close() if not os.path.exists('osk.db')"
 EXPOSE 5000
-CMD ["python", "app.py"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
