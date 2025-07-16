@@ -45,7 +45,7 @@ class Slide(db.Model):
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
-    position = db.Column(db.Integer, default=0)      # ← NEW
+    order = db.Column(db.Integer, default=0)      # ← NEW
     price = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text)
     image = db.Column(db.String(120))  # filename stored in static/images/cennik
@@ -58,3 +58,5 @@ class GalleryImage(db.Model):
     alt       = db.Column(db.String(120))                   # "plac manewrowy" / "sala wykładowa"
     order     = db.Column(db.Integer, default=0)
     is_active = db.Column(db.Boolean, default=True)
+
+

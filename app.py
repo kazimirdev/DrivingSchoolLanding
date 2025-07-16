@@ -19,7 +19,7 @@ def inject_now():
 @app.route('/')
 def index():
     slides = Slide.query.filter_by(is_active=True).order_by(Slide.order).all()
-    categories = Category.query.filter_by(is_active=True).order_by(Category.position).all()
+    categories = Category.query.filter_by(is_active=True).order_by(Category.order).all()
     gallery_images = (
         GalleryImage.query.filter_by(
             is_active=True).order_by(GalleryImage.order).all())

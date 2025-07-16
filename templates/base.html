@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OSK STOP – Szkoła Jazdy</title>
+  <!-- kazimirdev -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Swiper -->
 <link rel="stylesheet"
@@ -18,7 +19,23 @@
     .swiper { height: auto; }
     .swiper-slide img { width: 100%; height: auto; object-fit: cover; }
     .swiper-pagination-bullet-active { background-color: #e3342f; }
-  /* cap width and centre at ≥ 1024px */
+/* ─────────── Cennik – colour swap on hover only ─────────── */
+.cennik .div-button{
+  transition:background-color .25s ease, color .25s ease;
+}
+
+.cennik .div-button:hover,
+.cennik .div-button:focus{
+  background:#d00000;       /* tile turns red          */
+}
+
+.cennik .div-button:hover *,
+.cennik .div-button:focus *{
+  color:#ffffff !important; /* all text → white        */
+  font-weight:700;          /* all text → bold         */
+}
+
+
 @media (min-width:1024px){
   .max-half{
     width:auto !important;

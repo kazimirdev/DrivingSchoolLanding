@@ -98,17 +98,19 @@
 </section>
 
 <!-- Cennik -->
-<section id="cennik" class="container mx-auto px-4 py-20" x-data="{open:null}">
+<section id="cennik"
+         class="cennik container mx-auto px-4 py-20"
+         x-data="{ open: null }">
   <h2 class="text-3xl font-bold mb-8">Cennik</h2>
   <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
     {% for c in categories %}
-      <div class="p-6 bg-white rounded-xl shadow flex flex-col hover-red-border">
+      <div class="div-button p-6 bg-white rounded-xl shadow flex flex-col">
         <button @click="open === {{ c.id }} ? open=null : open={{ c.id }}" class="text-left">
           <h3 class="text-xl font-semibold mb-2">{{ c.name }}</h3>
           <span class="text-2xl font-bold text-red-600">{{ c.price }}&nbsp;PLN</span>
         </button>
         <div x-show="open === {{ c.id }}" x-transition class="mt-4">
-          <p class="mb-3">{{ c.description }}</p>
+          <p class="mb-3"><b>{{ c.description }}</b></p>
           {% if c.image %}
             <img src="{{ url_for('static', filename='images/cennik/' ~ c.image) }}"
      alt="{{ c.name }}"
@@ -136,7 +138,7 @@
           </div>
         {% endfor %}
       </div>
-      <div class="swiper-button-prev  !text-red-600 hover:scale-110 transition z-20"></div>
+      <div class="swiper-button-prev !text-red-600 hover:scale-110 transition z-20"></div>
       <div class="swiper-button-next !text-red-600 hover:scale-110 transition z-20"></div>
     </div>
     <p id="gallery-subtitle" class="text-center font-semibold mt-4 text-lg">
