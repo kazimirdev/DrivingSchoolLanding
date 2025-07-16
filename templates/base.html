@@ -14,7 +14,27 @@
 <!-- ↓  delete defer  so the file is parsed immediately,
        before your own script at the bottom -->
 <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>  <!-- Alpine.js for interactivity -->
-  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+<!-- Alpine.js Lightbox store: must come BEFORE Alpine itself -->
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.store('lightbox', {
+      open: false,
+      src: '',
+      alt: '',
+      show(el) {
+        this.src = el.getAttribute('src');
+        this.alt = el.getAttribute('alt') || '';
+        this.open = true;
+      },
+      close() {
+        this.open = false;
+      }
+    });
+  });
+</script>
+
+<script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 
   <style>
@@ -153,24 +173,6 @@ document.querySelectorAll('.swiper:not(.gallery)').forEach(swiperEl => {
   </div>
 </template>
 
-
-<script>
-document.addEventListener('alpine:init', () => {
-  Alpine.store('lightbox', {
-    open: false,
-    src: '',
-    alt: '',
-    show(el) {
-      this.src = el.getAttribute('src');
-      this.alt = el.getAttribute('alt') || '';
-      this.open = true;
-    },
-    close() {
-      this.open = false;
-    }
-  });
-});
-</script>
 
 </body>
 </html>
