@@ -77,18 +77,6 @@ class MyAdminIndexView(AdminIndexView):
         if not (current_user.is_authenticated and current_user.is_admin):
             return redirect(url_for("login"))
         return super().index()
-    
-class OrderedView(SecureModelView):
-    """Generic view for tables that have an `order` column.
-
-    ▸ Lists are pre-sorted by that column.
-    ▸ The `order` cell is inline-editable, so you can
-      re-number rows directly from the grid.
-    """
-    form_rules = ("order",)
-    column_default_sort  = ("order", True)   # ascending
-    column_editable_list = ("order",)        # click-to-edit
-
 
 class SlideView(OrderedView):
     column_list       = ("order", "title", "image", "is_active")
