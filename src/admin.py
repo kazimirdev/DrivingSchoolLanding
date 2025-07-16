@@ -93,6 +93,19 @@ class OrderedView(SecureModelView):
     form_create_rules = ("order",)  # include in create rules
 
 
+class OrderedView(SecureModelView):
+    """Generic view for tables that have an `order` column.
+
+    ▸ Lists are pre-sorted by that column.
+    ▸ The `order` cell is inline-editable, so you can
+      re-number rows directly from the grid.
+    """
+    column_default_sort = ("order", True)  # ascending
+    column_editable_list = ("order",)  # click-to-edit
+    form_edit_rules = ("order",)  # include in edit rules
+    form_create_rules = ("order",)  # include in create rules
+
+
 class SlideView(OrderedView):
     column_list = ("order", "title", "image", "is_active")
     form_columns = ("order", "title", "content", "image", "is_active")
@@ -101,27 +114,18 @@ class SlideView(OrderedView):
 
 
 class GalleryImageView(OrderedView):
-    column_list       = ("order", "filename", "alt", "is_active")
-    form_columns      = ("order", "filename", "alt", "is_active")
+    column_list = ("order", "filename", "alt", "is_active")
+    form_columns = ("order", "filename", "alt", "is_active")
     form_extra_fields = {
         "filename": make_upload(
             label="Zdjęcie",
             path=GALLERY_PATH,
             rel_url="images/gallery/",
-            image=True)}
-    form_edit_rules = ("order", "filename", "alt", "is_active")  # include in edit rules
-    form_create_rules = ("order", "filename", "alt", "is_active")  # include in create rules
-
-
-class CategoryView(PriceOnlyCategoryView):
-    column_list       = ("name", "order", "price", "description", "image", "is_active")
-    form_columns      = ("name", "order", "price", "description", "image", "is_active")
-    form_extra_fields = {
-        "image": make_upload(
-            label="Obraz kategorii",
-            path=CENNIK_PATH,
-            rel_url="images/cennik/",
-            image=True)}
+            image=True
+        )
+    }
+    form_edit_rules = ("order", "filename", "alt", "is_active")
+    form_create_rules = ("order", "filename", "alt", "is_active")
 
 
 class PositionedView(SecureModelView):
