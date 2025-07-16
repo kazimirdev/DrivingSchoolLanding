@@ -76,7 +76,7 @@ document.addEventListener('alpine:init', () => {
         <a href="#" class="text-xl font-bold block -mt-1">STOP</a>
       </div>
 
-      <!-- Desktop nav -->
+      <!-- Desktop nav (only on lg+) -->
       <nav class="hidden lg:flex gap-6 whitespace-nowrap">
         <a href="#onas" class="hover:text-red-600">O&nbsp;nas</a>
         <a href="#nauka" class="hover:text-red-600">Nauka</a>
@@ -85,13 +85,13 @@ document.addEventListener('alpine:init', () => {
         <a href="#kontakt" class="hover:text-red-600">Kontakt</a>
       </nav>
 
-      <!-- Burger button -->
+      <!-- Burger button (only on mobile + tablet) -->
       <button @click="mobileOpen = !mobileOpen" class="lg:hidden text-3xl focus:outline-none">
         &#9776;
       </button>
     </div>
 
-    <!-- Fullscreen mobile menu -->
+    <!-- Fullscreen menu (mobile + tablet only) -->
     <div x-show="mobileOpen"
          x-cloak
          x-transition
