@@ -76,7 +76,7 @@ document.addEventListener('alpine:init', () => {
     </div>
 
     <!-- Desktop nav -->
-    <nav class="hidden md:flex gap-6 whitespace-nowrap">
+    <nav class="hidden lg:flex gap-6 whitespace-nowrap">
       <a href="#onas" class="hover:text-red-600">O&nbsp;nas</a>
       <a href="#nauka" class="hover:text-red-600">Nauka</a>
       <a href="#jak-rozpoczac" class="hover:text-red-600">Jak&nbsp;rozpocząć</a>
@@ -86,7 +86,7 @@ document.addEventListener('alpine:init', () => {
 
     <!-- Burger button (mobile only) -->
     <button @click="mobileOpen = !mobileOpen"
-            class="md:hidden text-3xl focus:outline-none">
+            class="lg:hidden text-3xl focus:outline-none">
       &#9776;
     </button>
   </div>
@@ -94,7 +94,7 @@ document.addEventListener('alpine:init', () => {
   <!-- Mobile menu -->
   <div x-show="mobileOpen"
        x-transition
-       class="md:hidden fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-6 text-xl font-semibold">
+       class="lg:hidden fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-6 text-xl font-semibold">
     <a href="#onas" class="hover:text-red-600" @click="mobileOpen = false">O&nbsp;nas</a>
     <a href="#nauka" class="hover:text-red-600" @click="mobileOpen = false">Nauka</a>
     <a href="#jak-rozpoczac" class="hover:text-red-600" @click="mobileOpen = false">Jak&nbsp;rozpocząć</a>
