@@ -80,12 +80,7 @@ class MyAdminIndexView(AdminIndexView):
 
 
 class OrderedView(SecureModelView):
-    """Generic view for tables that have an `order` column.
-
-    ▸ Lists are pre-sorted by that column.
-    ▸ The `order` cell is inline-editable, so you can
-      re-number rows directly from the grid.
-    """
+    """Generic view for tables that have an `order` column."""
     column_default_sort = ("order", True)  # ascending
     column_editable_list = ("order",)  # click-to-edit
     form_edit_rules = ("order",)  # include in edit rules
@@ -111,7 +106,7 @@ class GalleryImageView(OrderedView):
         )
     }
     form_edit_rules = ("order", "filename", "alt", "is_active")
-    form_create_rules = ("order", "filename", "alt", "is_active")
+    form_create_rules = ("order", "filename", "alt", "is_active"))
 
 
 class CategoryView(PriceOnlyCategoryView):
