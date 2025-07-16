@@ -13,8 +13,11 @@ app = Flask(__name__,
             static_url_path='/static')
 
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or secrets.token_hex(32)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///osk.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    "DATABASE_URL",
+    "sqlite:///db.sqlite3")  # Default to SQLite if no DATABASE_URL is set
 db.init_app(app)
+
 import src.admin
 
 @app.context_processor
