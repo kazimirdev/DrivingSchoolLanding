@@ -86,20 +86,6 @@ class OrderedView(SecureModelView):
     ▸ The `order` cell is inline-editable, so you can
       re-number rows directly from the grid.
     """
-    form_rules = ("order",)
-    column_default_sort = ("order", True)  # ascending
-    column_editable_list = ("order",)  # click-to-edit
-    form_edit_rules = ("order",)  # include in edit rules
-    form_create_rules = ("order",)  # include in create rules
-
-
-class OrderedView(SecureModelView):
-    """Generic view for tables that have an `order` column.
-
-    ▸ Lists are pre-sorted by that column.
-    ▸ The `order` cell is inline-editable, so you can
-      re-number rows directly from the grid.
-    """
     column_default_sort = ("order", True)  # ascending
     column_editable_list = ("order",)  # click-to-edit
     form_edit_rules = ("order",)  # include in edit rules
@@ -126,6 +112,17 @@ class GalleryImageView(OrderedView):
     }
     form_edit_rules = ("order", "filename", "alt", "is_active")
     form_create_rules = ("order", "filename", "alt", "is_active")
+
+
+class CategoryView(PriceOnlyCategoryView):
+    column_list       = ("name", "order", "price", "description", "image", "is_active")
+    form_columns      = ("name", "order", "price", "description", "image", "is_active")
+    form_extra_fields = {
+        "image": make_upload(
+            label="Obraz kategorii",
+            path=CENNIK_PATH,
+            rel_url="images/cennik/",
+            image=True)}
 
 
 class PositionedView(SecureModelView):
