@@ -1,6 +1,6 @@
 services:
   web:               # Flask + Gunicorn
-    build: ./app
+    build: .
     container_name: myapp_web
     restart: unless-stopped
 
