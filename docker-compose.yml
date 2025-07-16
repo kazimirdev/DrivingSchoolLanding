@@ -12,8 +12,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - certs:/etc/letsencrypt      # for HTTPS
+      - /etc/letsencrypt/live/osk-stop.info:/etc/letsencrypt/live/osk-stop.info:ro
+      - /etc/letsencrypt/archive/osk-stop.info:/etc/letsencrypt/archive/osk-stop.info:ro
     depends_on:
       - web
 
