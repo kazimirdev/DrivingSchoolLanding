@@ -7,7 +7,11 @@ from flask import Flask, render_template
 from src.db import db
 from src.models import Slide, Category, GalleryImage
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_folder='static',
+            template_folder='templates',
+            static_url_path='/static')
+
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or secrets.token_hex(32)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///osk.db'
 db.init_app(app)
