@@ -92,7 +92,7 @@ document.addEventListener('alpine:init', () => {
     </div>
 
     <!-- Fullscreen mobile menu (only visible below lg) -->
-    <div x-show="mobileOpen"
+    <div x-show="mobileOpen" @click.self="mobileOpen = false"
          x-cloak
          x-transition
          class="lg:hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center gap-6 text-xl font-semibold">
