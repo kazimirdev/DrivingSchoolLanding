@@ -112,6 +112,8 @@ class GalleryImageView(OrderedView):
 class CategoryView(PriceOnlyCategoryView):
     column_list       = ("name", "order", "price", "description", "image", "is_active")
     form_columns      = ("name", "order", "price", "description", "image", "is_active")
+    form_edit_rules   = ("name", "order", "price", "description", "image", "is_active")
+    form_create_rules = ("name", "order", "price", "description", "image", "is_active")
     form_extra_fields = {
         "image": make_upload(
             label="Obraz kategorii",
