@@ -15,6 +15,24 @@
        before your own script at the bottom -->
 <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>  <!-- Alpine.js for interactivity -->
   <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script>
+document.addEventListener('alpine:init', () => {
+  Alpine.store('lightbox', {
+    open: false,
+    src: '',
+    alt: '',
+    show(el) {
+      this.src = el.getAttribute('src');
+      this.alt = el.getAttribute('alt') || '';
+      this.open = true;
+    },
+    close() {
+      this.open = false;
+    }
+  });
+});
+</script>
+
   <style>
     .swiper { height: auto; }
     .swiper-slide img { width: 100%; height: auto; object-fit: cover; }
@@ -48,23 +66,7 @@
 [x-cloak] { display:none !important; }
 
   </style>
-<script>
-document.addEventListener('alpine:init', () => {
-  Alpine.store('lightbox', {
-    open: false,
-    src: '',
-    alt: '',
-    show(el) {
-      this.src = el.getAttribute('src');
-      this.alt = el.getAttribute('alt') || '';
-      this.open = true;
-    },
-    close() {
-      this.open = false;
-    }
-  });
-});
-</script>
+
 
 </head>
 <body class="font-sans leading-relaxed text-gray-800">
