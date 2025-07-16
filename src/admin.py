@@ -78,37 +78,6 @@ class MyAdminIndexView(AdminIndexView):
             return redirect(url_for("login"))
         return super().index()
 
-
-class OrderedView(SecureModelView):
-    """Generic view for tables that have an `order` column."""
-    column_default_sort = ("order", True)  # ascending
-    column_editable_list = ("order",)  # click-to-edit
-    form_edit_rules = ("order",)  # include in edit rules
-    form_create_rules = ("order",)  # include in create rules
-
-
-class SlideView(OrderedView):
-    column_list = ("order", "title", "image", "is_active")
-    form_columns = ("order", "title", "content", "image", "is_active")
-    form_edit_rules = ("order", "title", "content", "image", "is_active")
-    form_create_rules = ("order", "title", "content", "image", "is_active")
-
-
-class GalleryImageView(OrderedView):
-    column_list = ("order", "filename", "alt", "is_active")
-    form_columns = ("order", "filename", "alt", "is_active")
-    form_extra_fields = {
-        "filename": make_upload(
-            label="Zdjęcie",
-            path=GALLERY_PATH,
-            rel_url="images/gallery/",
-            image=True
-        )
-    }
-    form_edit_rules = ("order", "filename", "alt", "is_active")
-    form_create_rules = ("order", "filename", "alt", "is_active")
-
-
 class CategoryView(PriceOnlyCategoryView):
     column_list       = ("name", "order", "price", "description", "image", "is_active")
     form_columns      = ("name", "order", "price", "description", "image", "is_active")
