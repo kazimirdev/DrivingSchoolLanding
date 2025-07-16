@@ -78,6 +78,7 @@ class MyAdminIndexView(AdminIndexView):
             return redirect(url_for("login"))
         return super().index()
 
+
 class OrderedView(SecureModelView):
     """Generic view for tables that have an `order` column.
 
@@ -86,23 +87,17 @@ class OrderedView(SecureModelView):
       re-number rows directly from the grid.
     """
     form_rules = ("order",)
-    column_default_sort  = ("order", True)   # ascending
-    column_editable_list = ("order",)        # click-to-edit
-    form_edit_rules = ("order",)             # include in edit rules
-    form_create_rules = ("order",)           # include in create rules
+    column_default_sort = ("order", True)  # ascending
+    column_editable_list = ("order",)  # click-to-edit
+    form_edit_rules = ("order",)  # include in edit rules
+    form_create_rules = ("order",)  # include in create rules
 
 
 class SlideView(OrderedView):
-    column_list       = ("order", "title", "image", "is_active")
-    form_columns      = ("order", "title", "content", "image", "is_active")
-    form_extra_fields = {
-        "image": make_upload(
-            label="Obraz slajdu",
-            path=NAUKA_PATH,
-            rel_url="images/nauka/",
-            image=True)}
-    form_edit_rules = ("order", "title", "content", "image", "is_active")  # include in edit rules
-    form_create_rules = ("order", "title", "content", "image", "is_active")  # include in create rules
+    column_list = ("order", "title", "image", "is_active")
+    form_columns = ("order", "title", "content", "image", "is_active")
+    form_edit_rules = ("order", "title", "content", "image", "is_active")
+    form_create_rules = ("order", "title", "content", "image", "is_active")
 
 
 class GalleryImageView(OrderedView):
