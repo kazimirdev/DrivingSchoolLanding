@@ -43,6 +43,41 @@ def index():
         hero_text=hero_text,
     )
 
+@app.route('/robots.txt')
+def robots_txt():
+    return (
+        "User-agent: *\n"
+        "Disallow:\n"
+        "Sitemap: https://osk-stop.info/sitemap.xml\n",
+        200,
+        {'Content-Type': 'text/plain'}
+    )
+
+from flask import Response, url_for
+
+@app.route('/sitemap.xml')
+def sitemap():
+    pages = []
+    ten_days_ago = datetime.utcnow().date().isoformat()
+
+    # Static pages you want indexed (add more if needed)
+    static_urls = ['index']
+    for rule in static_urls:
+        pages.append(f"""
+    <url>
+        <loc>{url_for(rule, _external=True)}</loc>
+        <lastmod>{ten_days_ago}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>""")
+
+    xml_sitemap = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{''.join(pages)}
+</urlset>"""
+
+    return Response(xml_sitemap, mimetype='application/xml')
+
 if __name__ == '__main__':
     app.run(debug=True)
 
