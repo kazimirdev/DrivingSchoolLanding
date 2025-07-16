@@ -16,8 +16,6 @@ services:
     volumes:
       - ./nginx/default.conf:/etc/nginx/nginx.conf:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
-      - /etc/letsencrypt/live/osk-stop.info:/etc/letsencrypt/live/osk-stop.info:ro
-      - /etc/letsencrypt/archive/osk-stop.info:/etc/letsencrypt/archive/osk-stop.info:ro
     depends_on:
       - web
 
