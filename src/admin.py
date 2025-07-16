@@ -106,7 +106,7 @@ class GalleryImageView(OrderedView):
         )
     }
     form_edit_rules = ("order", "filename", "alt", "is_active")
-    form_create_rules = ("order", "filename", "alt", "is_active"))
+    form_create_rules = ("order", "filename", "alt", "is_active")
 
 
 class CategoryView(PriceOnlyCategoryView):
