@@ -7,3 +7,5 @@ services:
       - "8000:8000"
     volumes:
       - /srv/osk/static:/app/static
+    env_file:
+      - .env
