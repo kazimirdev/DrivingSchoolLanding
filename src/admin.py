@@ -127,8 +127,7 @@ class PositionedView(SecureModelView):
     column_editable_list = ("position", "is_active")
 
 
-admin = Admin(app, name="OSK Admin", index_view=MyAdminIndexView(),
-              template_mode="bootstrap4")
+admin = Admin(app, name="OSK Admin", index_view=MyAdminIndexView())
 
 admin.add_view(CategoryView(Category, db.session, name="Cennik"))
 admin.add_view(SlideView(Slide, db.session, name="Slajdy"))
